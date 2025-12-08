@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-bg: hsl(0 0% 100%);
+  --color-fg: hsl(0 0% 0%);
+  --color-primary: hsl(230 100% 65%); /* Bright Blue */
+  --color-surface: hsl(0 0% 98%);
+  --color-border: hsl(0 0% 0%);
+  
+  --font-sans: "Noto Sans TC", "Space Grotesk", sans-serif;
+  --font-serif: "Noto Serif TC", serif;
+  
+  --shadow-hard: 4px 4px 0px 0px var(--color-border);
+  --shadow-hard-sm: 2px 2px 0px 0px var(--color-border);
+}
+
+@layer base {
+  :root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --primary: #4f46e5; /* Indigo 600 */
+    --surface: #f3f4f6;
+    --border: #000000;
+    --accent: #facc15; /* Yellow 400 */
+  }
+
+  .dark {
+    --bg: #121212;
+    --fg: #ffffff;
+    --primary: #818cf8; /* Indigo 400 */
+    --surface: #1e1e1e;
+    --border: #ffffff;
+    --accent: #fde047; /* Yellow 300 */
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  .btn-quadratic {
+    @apply border-2 border-[var(--border)] bg-[var(--surface)] text-[var(--fg)] px-4 py-2 font-bold transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--border)] active:translate-y-0 active:shadow-none;
+  }
+  
+  .btn-quadratic-primary {
+    @apply border-2 border-[var(--border)] bg-[var(--primary)] text-white px-4 py-2 font-bold transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--border)] active:translate-y-0 active:shadow-none;
+  }
+
+  .card-quadratic {
+    @apply border-2 border-[var(--border)] bg-[var(--surface)] p-6 shadow-[4px_4px_0px_0px_var(--border)];
+  }
+
+  .input-quadratic {
+    @apply w-full border-2 border-[var(--border)] bg-transparent px-3 py-2 text-sm placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 2px solid var(--border);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border: 2px solid var(--border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fg);
+}
