@@ -23,7 +23,7 @@ export default defineConfig({
         ]
       : []),
   ],
-  base: process.env.GITHUB_PAGES === "true" ? "./" : "/",
+  base: process.env.GITHUB_PAGES === "true" ? "/bible365/" : "/",
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
