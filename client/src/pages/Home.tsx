@@ -126,7 +126,7 @@ export default function Home() {
               屬靈健保書
             </h1>
             <p className="font-serif text-xl text-[var(--fg)] italic">
-              "天天讀經，靈命更新"
+              "一年版讀經計劃"
             </p>
           </motion.div>
         </div>
@@ -244,8 +244,9 @@ export default function Home() {
       {!reading.isRestDay && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[var(--border)] bg-[var(--surface)] px-4 py-4">
           <div className="container mx-auto flex max-w-3xl items-center justify-between">
-            <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider">
-              Selected: <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span>
+            <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider flex items-center gap-4">
+              <span>Selected: <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span></span>
+              <span className="text-xs text-[var(--muted-fg)] normal-case tracking-normal">錯誤回報：tainan@wwbch.org</span>
             </div>
             <button
               onClick={handleCopy}
