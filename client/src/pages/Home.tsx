@@ -45,7 +45,7 @@ export default function Home() {
         title: "沒有選擇經文",
         description: "請先勾選您想複製的經文。",
         variant: "destructive",
-        className: "border-2 border-black rounded-none shadow-[4px_4px_0px_0px_black] bg-opacity-100 bg-red-100",
+        className: "border-2 border-black rounded-none shadow-[4px_4px_0px_0px_black] bg-white text-black",
       });
       return;
     }
