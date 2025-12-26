@@ -45,7 +45,7 @@ export default function Home() {
         title: "沒有選擇經文",
         description: "請先勾選您想複製的經文。",
         variant: "destructive",
-        className: "border-2 border-black rounded-none shadow-[4px_4px_0px_0px_black]",
+        className: "border-2 border-black rounded-none shadow-[4px_4px_0px_0px_black] bg-opacity-100 bg-red-100",
       });
       return;
     }
@@ -245,7 +245,7 @@ export default function Home() {
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[var(--border)] bg-[var(--surface)] px-4 py-4">
           <div className="container mx-auto flex max-w-3xl items-center justify-between">
             <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider flex items-center gap-4">
-              <span>Selected: <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span></span>
+              <span>已選擇： <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span></span>
               <span className="text-xs text-[var(--muted-fg)] normal-case tracking-normal">錯誤回報：tainan@wwbch.org</span>
             </div>
             <button
