@@ -35,7 +35,7 @@ export default function Home() {
     } else {
       newChecked.add(id);
     }
-    
+
     setCheckedIds(newChecked);
   };
 
@@ -66,7 +66,7 @@ export default function Home() {
 
     allVerses.forEach((verse, index) => {
       const match = verse.reference.match(/^(.+)\s(\d+)[:：](\d+)/);
-      
+
       let currentBookChapter = "";
       let verseNum = "";
       let fullRef = verse.reference;
@@ -76,8 +76,8 @@ export default function Home() {
         currentBookChapter = `${book} ${chapter}`;
         verseNum = vNum;
       } else {
-         currentBookChapter = verse.reference.split(":")[0];
-         verseNum = verse.reference.split(":")[1] || "";
+        currentBookChapter = verse.reference.split(":")[0];
+        verseNum = verse.reference.split(":")[1] || "";
       }
 
       if (index === 0) {
@@ -89,7 +89,7 @@ export default function Home() {
           result += `\n\n${fullRef} ${verse.text}`;
         }
       }
-      
+
       lastBookChapter = currentBookChapter;
     });
 
@@ -109,10 +109,10 @@ export default function Home() {
       {/* Header / Hero */}
       <div className="relative w-full border-b-2 border-[var(--border)] bg-[var(--surface)] py-12">
         {/* Pattern Background */}
-        <div className="absolute inset-0 opacity-10" 
-             style={{ backgroundImage: 'radial-gradient(var(--border) 1px, transparent 1px)', backgroundSize: '20px 20px' }} 
+        <div className="absolute inset-0 opacity-10"
+          style={{ backgroundImage: 'radial-gradient(var(--border) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
         />
-        
+
         <div className="relative container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,7 +130,7 @@ export default function Home() {
             </p>
           </motion.div>
         </div>
-        
+
         {/* Theme Toggle */}
         <div className="absolute top-4 right-4 z-20">
           <ModeToggle />
@@ -143,40 +143,39 @@ export default function Home() {
         <div className="mb-8 border-2 border-[var(--border)] bg-[var(--bg)] p-0 shadow-[8px_8px_0px_0px_var(--border)]">
           <div className="flex flex-col md:flex-row">
             <div className="flex-1 p-6 border-b-2 md:border-b-0 md:border-r-2 border-[var(--border)] flex items-center gap-4">
-               <div className="flex h-16 w-16 items-center justify-center border-2 border-[var(--border)] bg-[var(--primary)] text-white shadow-[2px_2px_0px_0px_var(--border)]">
-                  <Calendar className="h-8 w-8" strokeWidth={2.5} />
-               </div>
-               <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--fg)] opacity-60">Today's Reading</p>
-                  <h2 className="font-sans text-2xl font-black text-[var(--fg)]">
-                    {format(new Date(reading.date), "M月d日 EEEE", { locale: zhTW })}
-                  </h2>
-               </div>
+              <div className="flex h-16 w-16 items-center justify-center border-2 border-[var(--border)] bg-[var(--primary)] text-white shadow-[2px_2px_0px_0px_var(--border)]">
+                <Calendar className="h-8 w-8" strokeWidth={2.5} />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[var(--fg)] opacity-60">Today's Reading</p>
+                <h2 className="font-sans text-2xl font-black text-[var(--fg)]">
+                  {format(new Date(reading.date), "M月d日 EEEE", { locale: zhTW })}
+                </h2>
+              </div>
             </div>
-            
+
             <div className="flex items-center bg-[var(--surface)] p-2 gap-2">
-              <button 
+              <button
                 onClick={handlePrevDay}
                 className="btn-quadratic h-full flex-1 flex items-center justify-center gap-2 text-sm"
               >
                 <ChevronLeft className="h-4 w-4" />
                 <span className="hidden sm:inline">前一天</span>
               </button>
-              
-              <button 
+
+              <button
                 onClick={handleToday}
                 disabled={isSameDay(currentDate, new Date())}
-                className={`h-full flex-1 flex items-center justify-center gap-2 border-2 border-[var(--border)] px-4 font-bold text-sm transition-all ${
-                  isSameDay(currentDate, new Date())
+                className={`h-full flex-1 flex items-center justify-center gap-2 border-2 border-[var(--border)] px-4 font-bold text-sm transition-all ${isSameDay(currentDate, new Date())
                     ? "bg-[var(--fg)] text-[var(--bg)] opacity-50 cursor-not-allowed"
                     : "bg-[var(--bg)] hover:bg-[var(--primary)] hover:text-white hover:shadow-[2px_2px_0px_0px_var(--border)] hover:-translate-y-0.5"
-                }`}
+                  }`}
               >
                 <HomeIcon className="h-4 w-4" />
                 <span className="hidden sm:inline">今日</span>
               </button>
 
-              <button 
+              <button
                 onClick={handleNextDay}
                 className="btn-quadratic h-full flex-1 flex items-center justify-center gap-2 text-sm"
               >
@@ -189,7 +188,7 @@ export default function Home() {
 
         {/* Content Area */}
         {reading.isRestDay ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex flex-col items-center justify-center border-2 border-[var(--border)] bg-[var(--surface)] py-24 text-center shadow-[8px_8px_0px_0px_var(--border)]"
