@@ -45,7 +45,7 @@ export default function Home() {
         title: "沒有選擇經文",
         description: "請先勾選您想複製的經文。",
         variant: "destructive",
-        className: "border-2 border-black rounded-none shadow-[4px_4px_0px_0px_black] bg-white text-black",
+        className: "border-2 border-[var(--border)] bg-[var(--surface)] text-[var(--fg)] rounded-none shadow-[4px_4px_0px_0px_var(--border)]",
       });
       return;
     }
@@ -167,8 +167,8 @@ export default function Home() {
                 onClick={handleToday}
                 disabled={isSameDay(currentDate, new Date())}
                 className={`h-full flex-1 flex items-center justify-center gap-2 border-2 border-[var(--border)] px-4 font-bold text-sm transition-all ${isSameDay(currentDate, new Date())
-                    ? "bg-[var(--fg)] text-[var(--bg)] opacity-50 cursor-not-allowed"
-                    : "bg-[var(--bg)] hover:bg-[var(--primary)] hover:text-white hover:shadow-[2px_2px_0px_0px_var(--border)] hover:-translate-y-0.5"
+                  ? "bg-[var(--fg)] text-[var(--bg)] opacity-50 cursor-not-allowed"
+                  : "bg-[var(--bg)] hover:bg-[var(--primary)] hover:text-white hover:shadow-[2px_2px_0px_0px_var(--border)] hover:-translate-y-0.5"
                   }`}
               >
                 <HomeIcon className="h-4 w-4" />
