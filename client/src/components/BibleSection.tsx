@@ -1,9 +1,8 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Check, Square, CheckSquare } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Verse } from "@/lib/bible-data";
-import { Checkbox } from "@/components/ui/checkbox";
 
 interface BibleSectionProps {
   title: string;

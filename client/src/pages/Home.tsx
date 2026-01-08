@@ -27,7 +27,7 @@ export default function Home() {
   const handleNextDay = () => setCurrentDate(prev => addDays(prev, 1));
   const handleToday = () => setCurrentDate(new Date());
 
-  const handleToggleVerse = (id: string, fullText: string) => {
+  const handleToggleVerse = (id: string) => {
     const newChecked = new Set(checkedIds);
 
     if (newChecked.has(id)) {
