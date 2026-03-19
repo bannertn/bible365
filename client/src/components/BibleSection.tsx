@@ -88,7 +88,7 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
                         <label
                           className={cn(
                             "block font-serif text-lg leading-relaxed transition-colors cursor-pointer select-none",
-                            isChecked ? "text-[var(--fg)] opacity-50 line-through decoration-2" : "text-[var(--fg)]"
+                            isChecked ? "text-[var(--fg)] underline decoration-2 underline-offset-4" : "text-[var(--fg)]"
                           )}
                         >
                           <span className="mr-2 inline-block font-sans text-sm font-black text-[var(--primary)] uppercase tracking-wider border border-[var(--border)] px-1 py-0.5">
