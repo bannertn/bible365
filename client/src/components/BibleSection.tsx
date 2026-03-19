@@ -76,13 +76,13 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
                       onClick={() => onToggleVerse(verse.id, `${verse.reference} ${verse.text}`)}
                     >
                       <div className="pt-1.5 shrink-0">
-                         {/* Custom Checkbox for Quadratic Look */}
-                         <div className={cn(
-                           "h-6 w-6 border-2 border-[var(--border)] transition-colors flex items-center justify-center",
-                           isChecked ? "bg-[var(--primary)]" : "bg-transparent hover:bg-[var(--surface)]"
-                         )}>
-                           {isChecked && <Check className="h-4 w-4 text-white" strokeWidth={4} />}
-                         </div>
+                        {/* Custom Checkbox for Quadratic Look */}
+                        <div className={cn(
+                          "h-6 w-6 border-2 border-[var(--border)] transition-colors flex items-center justify-center",
+                          isChecked ? "bg-[var(--primary)]" : "bg-transparent hover:bg-[var(--surface)]"
+                        )}>
+                          {isChecked && <Check className="h-4 w-4 text-white" strokeWidth={4} />}
+                        </div>
                       </div>
                       <div className="flex-1 space-y-1">
                         <label
