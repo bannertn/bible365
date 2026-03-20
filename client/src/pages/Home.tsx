@@ -13,6 +13,10 @@ export default function Home() {
   const [reading, setReading] = useState<DailyReading | null>(null);
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
   const [openSection, setOpenSection] = useState<string | null>(null);
+  const [fontSizeMultiplier, setFontSizeMultiplier] = useState<number>(() => {
+    const saved = localStorage.getItem("bible365-font-size");
+    return saved ? parseFloat(saved) : 1.0;
+  });
   const { toast } = useToast();
 
   // Initialize data when date changes
@@ -37,6 +41,14 @@ export default function Home() {
     }
 
     setCheckedIds(newChecked);
+  };
+
+  const updateFontSize = (delta: number) => {
+    setFontSizeMultiplier(prev => {
+      const next = Math.max(0.2, Math.min(5.0, prev + delta));
+      localStorage.setItem("bible365-font-size", next.toString());
+      return next;
+    });
   };
 
   const handleCopy = () => {
@@ -210,6 +222,7 @@ export default function Home() {
               onToggleVerse={handleToggleVerse}
               isOpen={openSection === "psalms"}
               onToggle={() => setOpenSection(openSection === "psalms" ? null : "psalms")}
+              fontSizeMultiplier={fontSizeMultiplier}
             />
             <BibleSection
               title="新約"
@@ -218,6 +231,7 @@ export default function Home() {
               onToggleVerse={handleToggleVerse}
               isOpen={openSection === "newTestament"}
               onToggle={() => setOpenSection(openSection === "newTestament" ? null : "newTestament")}
+              fontSizeMultiplier={fontSizeMultiplier}
             />
             <BibleSection
               title="舊約"
@@ -226,6 +240,7 @@ export default function Home() {
               onToggleVerse={handleToggleVerse}
               isOpen={openSection === "oldTestament"}
               onToggle={() => setOpenSection(openSection === "oldTestament" ? null : "oldTestament")}
+              fontSizeMultiplier={fontSizeMultiplier}
             />
             <BibleSection
               title="箴言"
@@ -234,6 +249,7 @@ export default function Home() {
               onToggleVerse={handleToggleVerse}
               isOpen={openSection === "proverbs"}
               onToggle={() => setOpenSection(openSection === "proverbs" ? null : "proverbs")}
+              fontSizeMultiplier={fontSizeMultiplier}
             />
           </div>
         )}
@@ -243,10 +259,32 @@ export default function Home() {
       {!reading.isRestDay && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[var(--border)] bg-[var(--surface)] px-4 py-4">
           <div className="container mx-auto flex max-w-3xl items-center justify-between">
-            <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider flex items-center gap-4">
-              <span>已選取： <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span></span>
-              <span className="text-xs text-[var(--muted-fg)] normal-case tracking-normal">錯誤回報：tainan@wwbch.org</span>
+            <div className="flex items-center gap-6">
+              <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider">
+                已選取： <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span>
+              </div>
+              
+              <div className="flex items-center border-[2px] border-[var(--border)] bg-[var(--bg)] shadow-[2px_2px_0px_0px_var(--border)]">
+                <button 
+                  onClick={() => updateFontSize(-0.1)}
+                  className="px-3 py-1 font-black hover:bg-[var(--surface)] border-r-2 border-[var(--border)] transition-colors"
+                  title="縮小字體"
+                >
+                  -
+                </button>
+                <div className="px-3 py-1 text-xs font-bold min-w-[60px] text-center">
+                  {Math.round(fontSizeMultiplier * 100)}%
+                </div>
+                <button 
+                  onClick={() => updateFontSize(0.1)}
+                  className="px-3 py-1 font-black hover:bg-[var(--surface)] border-l-2 border-[var(--border)] transition-colors"
+                  title="放大字體"
+                >
+                  +
+                </button>
+              </div>
             </div>
+
             <button
               onClick={handleCopy}
               className="btn-quadratic-primary flex items-center gap-2 text-sm uppercase tracking-wider"

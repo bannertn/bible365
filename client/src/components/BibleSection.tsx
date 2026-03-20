@@ -11,6 +11,7 @@ interface BibleSectionProps {
   onToggleVerse: (id: string, text: string) => void;
   isOpen: boolean;
   onToggle: () => void;
+  fontSizeMultiplier: number;
 }
 
 export const BibleSection: React.FC<BibleSectionProps> = ({
@@ -20,6 +21,7 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
   onToggleVerse,
   isOpen,
   onToggle,
+  fontSizeMultiplier,
 }) => {
   // Calculate progress
   const sectionIds = verses.map((v) => v.id);
@@ -87,11 +89,15 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
                       <div className="flex-1 space-y-1">
                         <label
                           className={cn(
-                            "block font-serif text-lg leading-relaxed transition-colors cursor-pointer select-none",
+                            "block font-serif transition-colors cursor-pointer select-none",
                             isChecked ? "text-[var(--fg)] underline decoration-2 underline-offset-4" : "text-[var(--fg)]"
                           )}
+                          style={{ 
+                            fontSize: `${1.125 * fontSizeMultiplier}rem`,
+                            lineHeight: 1.5
+                          }}
                         >
-                          <span className="mr-2 inline-block font-sans text-sm font-black text-[var(--primary)] uppercase tracking-wider border border-[var(--border)] px-1 py-0.5">
+                          <span className="mr-2 inline-block font-sans text-sm font-black text-[var(--primary)] uppercase tracking-wider border border-[var(--border)] px-1 py-0.5" style={{ fontSize: '0.875rem' }}>
                             {verse.reference}
                           </span>
                           {verse.text}
