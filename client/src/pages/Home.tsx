@@ -43,6 +43,8 @@ export default function Home() {
     setCheckedIds(newChecked);
   };
 
+  const handleReset = () => setCheckedIds(new Set());
+
   const updateFontSize = (delta: number) => {
     setFontSizeMultiplier(prev => {
       const next = Math.max(0.2, Math.min(5.0, prev + delta));
@@ -258,7 +260,7 @@ export default function Home() {
       {/* Floating Action Bar */}
       {!reading.isRestDay && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[var(--border)] bg-[var(--surface)] px-4 py-4">
-          <div className="container mx-auto flex max-w-3xl items-center justify-between">
+          <div className="container mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-6">
               <div className="text-sm font-bold text-[var(--fg)] uppercase tracking-wider">
                 已選取： <span className="text-[var(--primary)] text-lg ml-1">{checkedIds.size}</span>
@@ -285,13 +287,23 @@ export default function Home() {
               </div>
             </div>
 
-            <button
-              onClick={handleCopy}
-              className="btn-quadratic-primary flex items-center gap-2 text-sm uppercase tracking-wider"
-            >
-              <Copy className="h-4 w-4" />
-              複製經文
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleCopy}
+                className="btn-quadratic-primary flex items-center gap-2 text-sm uppercase tracking-wider"
+              >
+                <Copy className="h-4 w-4" />
+                複製經文
+              </button>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="btn-quadratic text-sm"
+                aria-label="重設，取消所有已選取的經文"
+              >
+                重設
+              </button>
+            </div>
           </div>
         </div>
       )}
