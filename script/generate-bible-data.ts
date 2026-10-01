@@ -300,7 +300,7 @@ async function main() {
            verses.push({
              id: `${bookData.abbrev}-${ch}-${v}`,
              reference: `${canonicalBookName} ${ch}:${v}`,
-             text: text.replace(/\s+/g, '') // Remove all spaces
+             text: text.trim() === 'a' || text.trim() === '同上節' ? '同上節  ' : text.replace(/\s+/g, '') // Remove all spaces
            });
         }
       }

@@ -7,9 +7,12 @@ import { getDailyReading, type DailyReading } from "@/lib/bible-data";
 import { BibleSection } from "@/components/BibleSection";
 import { useToast } from "@/hooks/use-toast";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Calendar as DateCalendar } from "@/components/ui/calendar";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [reading, setReading] = useState<DailyReading | null>(null);
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -156,17 +159,55 @@ export default function Home() {
         {/* Date Navigation Card */}
         <div className="mb-8 border-2 border-[var(--border)] bg-[var(--bg)] p-0 shadow-[8px_8px_0px_0px_var(--border)]">
           <div className="flex flex-col md:flex-row">
-            <div className="flex-1 p-6 border-b-2 md:border-b-0 md:border-r-2 border-[var(--border)] flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center border-2 border-[var(--border)] bg-[var(--primary)] text-white shadow-[2px_2px_0px_0px_var(--border)]">
-                <Calendar className="h-8 w-8" strokeWidth={2.5} />
-              </div>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-[var(--fg)] opacity-60">Today's Reading</p>
-                <h2 className="font-sans text-2xl font-black text-[var(--fg)]">
-                  {format(new Date(reading.date), "M月d日 EEEE", { locale: zhTW })}
-                </h2>
-              </div>
-            </div>
+            <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="選擇讀經日期"
+                  className="flex-1 p-6 border-b-2 md:border-b-0 md:border-r-2 border-[var(--border)] flex items-center gap-4 text-left cursor-pointer hover:bg-[var(--surface)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--primary)]"
+                >
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-[var(--border)] bg-[var(--primary)] text-white shadow-[2px_2px_0px_0px_var(--border)]">
+                    <Calendar className="h-8 w-8" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-[var(--fg)] opacity-60">Today's Reading</p>
+                    <h2 className="font-sans text-2xl font-black text-[var(--fg)]">
+                      {format(new Date(reading.date), "M月d日 EEEE", { locale: zhTW })}
+                    </h2>
+                  </div>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="start"
+                className="w-auto max-w-[calc(100vw-2rem)] rounded-none border-2 border-[var(--border)] bg-[var(--bg)] p-0 text-[var(--fg)] shadow-[4px_4px_0px_0px_var(--border)]"
+                aria-label="讀經日期日曆"
+              >
+                <DateCalendar
+                  mode="single"
+                  required
+                  selected={currentDate}
+                  defaultMonth={currentDate}
+                  locale={zhTW}
+                  captionLayout="dropdown"
+                  navLayout="around"
+                  className="w-[280px] max-w-full [--cell-size:2.25rem]"
+                  classNames={{
+                    month_caption: "flex h-11 w-full items-center justify-between gap-3",
+                    dropdowns: "flex h-11 items-center justify-center gap-3 text-sm font-medium",
+                    button_previous: "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[var(--border)] hover:bg-[var(--surface)]",
+                    button_next: "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[var(--border)] hover:bg-[var(--surface)]",
+                  }}
+                  startMonth={new Date(currentDate.getFullYear() - 100, 0)}
+                  endMonth={new Date(currentDate.getFullYear() + 100, 11)}
+                  autoFocus
+                  onSelect={(date) => {
+                    if (!date) return;
+                    setCurrentDate(date);
+                    setCalendarOpen(false);
+                  }}
+                />
+              </PopoverContent>
+            </Popover>
 
             <div className="flex items-center bg-[var(--surface)] p-2 gap-2">
               <button
