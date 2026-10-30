@@ -7,6 +7,10 @@ import * as path from 'path';
 const EXCEL_PATH = 'attached_assets/完整清單_\'詩篇\'、\'新約\'、\'舊約\'、\'箴言\'，的進度內容_1765170972505.xlsx';
 const BIBLE_JSON_PATH = 'attached_assets/zh_cuv.json';
 const OUTPUT_PATH = 'client/src/lib/bible-data.json';
+// User-corrected schedule entries take precedence over the original workbook.
+const scheduleOverrides = JSON.parse(
+  fs.readFileSync('script/reading-schedule-overrides.json', 'utf8')
+) as Record<string, Record<string, string>>;
 
 // --- Constants ---
 const BIBLE_BOOKS_CHINESE = [
@@ -245,7 +249,8 @@ async function main() {
     }
 
     // Parse Reference
-    const parsedRef = parseReference(referenceStr);
+    const correctedReference = scheduleOverrides[dateKey]?.[sectionName] ?? referenceStr;
+    const parsedRef = parseReference(correctedReference);
     if (!parsedRef) {
       console.warn(`Could not parse reference: ${referenceStr}`);
       continue;
