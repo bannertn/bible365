@@ -20,6 +20,7 @@
     --bg: #ffffff;
     --fg: #000000;
     --primary: #4f46e5; /* Indigo 600 */
+    --verse-reference: #4f46e5;
     --surface: #f3f4f6;
     --border: #000000;
     --accent: #facc15; /* Yellow 400 */
@@ -29,6 +30,7 @@
     --bg: #121212;
     --fg: #ffffff;
     --primary: #818cf8; /* Indigo 400 */
+    --verse-reference: var(--fg);
     --surface: #1e1e1e;
     --border: #ffffff;
     --accent: #fde047; /* Yellow 300 */

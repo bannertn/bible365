@@ -69,8 +69,9 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
           >
             <div className="px-6 py-6 bg-[var(--bg)]">
               <div className="space-y-6">
-                {verses.map((verse) => {
+                {verses.map((verse, index) => {
                   const isChecked = checkedVerses.has(verse.id);
+                  const verseNumber = verse.reference.match(/[:：](\d+)$/)?.[1];
                   return (
                     <div
                       key={verse.id}
@@ -97,8 +98,16 @@ export const BibleSection: React.FC<BibleSectionProps> = ({
                             lineHeight: 1.5
                           }}
                         >
-                          <span className="mr-2 inline-block font-sans text-sm font-black text-[var(--primary)] uppercase tracking-wider border border-[var(--border)] px-1 py-0.5" style={{ fontSize: '0.875rem' }}>
-                            {verse.reference}
+                          <span
+                            className={cn(
+                              "inline-block font-sans text-sm font-black uppercase tracking-wider",
+                              index === 0
+                                ? "border border-[var(--border)] px-1 py-0.5 text-[var(--primary)]"
+                                : "text-[var(--verse-reference)]"
+                            )}
+                            style={{ fontSize: '0.875rem', marginRight: '8px' }}
+                          >
+                            {index === 0 ? verse.reference : (verseNumber ?? verse.reference)}
                           </span>
                           {verse.text}
                         </label>
